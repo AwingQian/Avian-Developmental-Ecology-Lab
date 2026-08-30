@@ -83,7 +83,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
 
 .eyebrow {
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.14em;
   color: var(--rust);
   font-weight: 500;
@@ -163,7 +163,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--paper);
   position: relative;
@@ -308,7 +308,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
 .tag-pin.light { background: var(--stone); box-shadow: 0 0 0 3px var(--moss-dk); position: static; display: inline-block; margin-bottom: 14px; }
 .tag-mono {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .1em;
   color: var(--mist);
 }
@@ -318,7 +318,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   font-size: 19px;
   margin: 10px 0 10px;
 }
-.tag-card p { font-size: 14px; color: #4a544a; margin: 0; }
+.tag-card p { font-size: 15px; color: #4a544a; margin: 0; }
 
 /* ============================================================
    Publications
@@ -336,17 +336,19 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
 }
 .pub-list .pub-card:last-child { border-bottom: 1px solid rgba(27,38,32,0.12); }
 .pub-card:hover { padding-left: 10px; background: var(--paper-2); }
-.pub-year { color: var(--rust); font-size: 14px; }
+.pub-year { color: var(--rust); font-size: 16px; }
 .pub-title {
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 18px;
   margin: 0 0 8px;
-  line-height: 1.35;
+  line-height: 1.5;
 }
-.pub-meta { margin: 0; font-size: 13.5px; color: #5a645a; }
+.pub-meta { margin: 0; font-size: 15px; color: #5a645a; }
 .pub-journal { color: var(--moss); }
-.pub-link { font-size: 13px; font-weight: 600; color: var(--moss); white-space: nowrap; }
+.pub-link { font-size: 15px; font-weight: 600; color: var(--moss); white-space: nowrap; }
+.pub-title strong { color: var(--rust); font-weight: 700; }
+.pub-title em { font-style: italic; font-weight: 400; color: var(--moss-dk); }
 
 /* ============================================================
    About
@@ -379,7 +381,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   align-items: baseline;
 }
 .timeline-item:last-child { border-bottom: 1px solid rgba(27,38,32,0.12); }
-.timeline-year { font-size: 12.5px; color: var(--rust); line-height: 1.5; }
+.timeline-year { font-size: 14.5px; color: var(--rust); line-height: 1.5; }
 .timeline-item h4 {
   font-family: var(--font-display);
   font-weight: 500;
@@ -402,8 +404,8 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   gap: 60px;
   padding-bottom: 90px;
 }
-.contact-body { max-width: 42ch; color: rgba(246,243,236,0.82); font-size: 15px; }
-.contact-list { list-style: none; padding: 0; margin: 30px 0 0; font-size: 14px; }
+.contact-body { max-width: 42ch; color: rgba(246,243,236,0.82); font-size: 16px; }
+.contact-list { list-style: none; padding: 0; margin: 30px 0 0; font-size: 15.5px; }
 .contact-list li { padding: 10px 0; border-top: 1px solid rgba(246,243,236,0.15); color: rgba(246,243,236,0.9); }
 .contact-list a { color: var(--stone); }
 .contact-list a:hover { color: var(--paper); text-decoration: underline; }
@@ -413,7 +415,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   border-left: 1px solid rgba(246,243,236,0.25);
   padding-left: 30px;
 }
-.contact-note .small { font-size: 12px; color: var(--stone); margin: 0 0 12px; }
+.contact-note .small { font-size: 14px; color: var(--stone); margin: 0 0 12px; }
 .contact-quote {
   font-family: var(--font-display);
   font-style: italic;
@@ -430,7 +432,7 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 15px;
   color: rgba(246,243,236,0.55);
 }
 
