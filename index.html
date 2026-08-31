@@ -11,6 +11,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..700,0..1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Highlight the profile owner's name within publication author lists. */
+  .pub-list .pub-title strong {
+    color: #a0522d;
+    font-weight: 600;
+  }
+</style>
 </head>
 <body>
 
@@ -309,6 +316,17 @@ More broadly, I am interested in how animals respond to changing environments th
         .replace(/>/g, '&gt;');
     }
 
+    // Bold the profile owner's name within an already-escaped author
+    // string. Matches common orderings/abbreviations: "Qian Hu",
+    // "Hu, Qian", "Q. Hu", "Hu, Q." etc. Runs AFTER escaping so this only
+    // ever wraps known plain-text name patterns — it can't reintroduce
+    // literal tags from the source data.
+    function highlightOwnerName(escapedAuthors) {
+      if (!escapedAuthors) return escapedAuthors;
+      const pattern = /(Qian\s+Hu|Hu,?\s+Qian|Q\.?\s*Hu\b|Hu,?\s*Q\.?)/g;
+      return escapedAuthors.replace(pattern, '<strong>$1</strong>');
+    }
+
     // Author strings (when present) are already escaped plain text produced
     // by the fetch script — ORCID records don't always carry a full
     // contributor list, so this field can be empty; the layout adapts.
@@ -319,7 +337,7 @@ More broadly, I am interested in how animals respond to changing environments th
       const titleText = escapeHtml(rawTitle);
       const venueText = pub.venue ? ' <em>' + escapeHtml(pub.venue) + '</em>' : '';
       const yearText = pub.year ? escapeHtml(pub.year) : '';
-      const authorsText = pub.authors ? escapeHtml(pub.authors) + ' ' : '';
+      const authorsText = pub.authors ? highlightOwnerName(escapeHtml(pub.authors)) + ' ' : '';
       const yearPrefix = yearText ? '(' + yearText + '). ' : '';
       const titledHtml = pub.url
         ? '<a href="' + encodeURI(pub.url) + '" target="_blank" rel="noopener noreferrer">' + titleText + '</a>'
