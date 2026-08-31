@@ -1,76 +1,76 @@
 {
-  "updated": "2026-08-31T00:00:00Z",
+  "updated": "2026-08-31T03:25:30.146695+00:00",
   "source": "https://orcid.org/0000-0001-5389-4157",
   "publications": [
     {
       "year": "2026",
-      "authors": "Wang, H., <strong>Hu, Q.</strong>, Wang, Y., Lv, L., Wang, P., Zhang, Z., &amp; Li, J.",
-      "title": "Density and kinship interactively affect natal dispersal in a social bird.",
-      "venue": "Proceedings of the Royal Society B: Biological Sciences, 293(2070), 20252985",
-      "url": ""
+      "authors": "Hui Wang, Qian Hu, Yue Wang, Lei Lv, Pengcheng Wang, Zhengwang Zhang, Jianqiang Li",
+      "title": "Density and kinship interactively affect natal dispersal in a social bird",
+      "venue": "Proceedings of the Royal Society B: Biological Sciences",
+      "url": "https://doi.org/10.1098/rspb.2025.2985"
     },
     {
       "year": "2026",
-      "authors": "<strong>Hu, Q.</strong>, Xu, J., &amp; Li, J.",
-      "title": "Ecological and Life\u2010History Correlates of Incubation Attentiveness Differ Between Female\u2010Only and Biparentally Incubating Passerine Birds.",
-      "venue": "Global Ecology and Biogeography, 35(3), e70225",
-      "url": ""
+      "authors": "Qian Hu, Jiliang Xu, Jianqiang Li",
+      "title": "Ecological and Life‐History Correlates of Incubation Attentiveness Differ Between Female‐Only and Biparentally Incubating Passerine Birds",
+      "venue": "Global Ecology and Biogeography",
+      "url": "https://doi.org/10.1111/geb.70225"
     },
     {
       "year": "2026",
-      "authors": "<strong>Hu, Q.</strong>, Wang, Y., Wang, H., Wang, Y., Xia, X., Xu, J., &amp; Li, J.",
-      "title": "Parental care and bird embryonic metabolism: A comparison between uniparentally incubating Silver\u2010throated Tits and biparentally incubating Black\u2010throated Tits.",
-      "venue": "Functional Ecology, 40(4), 800-815",
-      "url": ""
+      "authors": "",
+      "title": "Parental care and bird embryonic metabolism: A comparison between uniparentally incubating Silver-throated Tits and biparentally incubating Black-throated Tits",
+      "venue": "FUNCTIONAL ECOLOGY",
+      "url": "https://doi.org/10.1111/1365-2435.70265"
     },
     {
       "year": "2025",
-      "authors": "<strong>Hu, Q.</strong>, Wang, Y., Yu, G., Lv, L., Wang, P., Wen, Y., ... &amp; Li, J.",
-      "title": "Biparentally incubating Aegithalos concinnus (Black-throated Tit) provide a more stable nest thermal environment than uniparentally incubating A. glaucogularis (Silver-throated Tit).",
-      "venue": "Ornithology, 142(4), ukaf025",
-      "url": ""
+      "authors": "",
+      "title": "Biparentally incubating Aegithalos concinnus (Black-throated Tit) provide a more stable nest thermal environment than uniparentally incubating A. glaucogularis (Silver-throated Tit)",
+      "venue": "ORNITHOLOGY",
+      "url": "https://doi.org/10.1093/ORNITHOLOGY/UKAF025"
     },
     {
       "year": "2025",
-      "authors": "Jin, T., <strong>Hu, Q.</strong>, Liu, Y., Li, J., Pan, S., &amp; Xu, J.",
-      "title": "Latitudinal variations in incubation behaviour among uniparental incubating birds.",
-      "venue": "Journal of Animal Ecology, 94(4), 800-810",
-      "url": ""
+      "authors": "",
+      "title": "Hanging Position of Artificial Nest Boxes Affects Reproductive Success of Russet Sparrow <i>Passer cinnamomeus</i>",
+      "venue": "ANIMALS",
+      "url": "https://doi.org/10.3390/ANI15101413"
+    },
+    {
+      "year": "2025",
+      "authors": "",
+      "title": "Latitudinal variations in incubation behaviour among uniparental incubating birds",
+      "venue": "JOURNAL OF ANIMAL ECOLOGY",
+      "url": "https://doi.org/10.1111/1365-2656.70022"
     },
     {
       "year": "2024",
-      "authors": "Wang, Y., <strong>Hu, Q.</strong>, Wang, Y., Liu, J., Du, Z., Xu, J., &amp; Li, J.",
-      "title": "Selective effect of winter weather on a songbird's morphology depends on individual sex and winter condition.",
-      "venue": "Oecologia, 205(2), 339-350",
-      "url": ""
+      "authors": "",
+      "title": "Selective effect of winter weather on a songbird's morphology depends on individual sex and winter condition",
+      "venue": "OECOLOGIA",
+      "url": "https://doi.org/10.1007/S00442-024-05577-0"
     },
     {
       "year": "2024",
-      "authors": "<strong>Hu, Q.</strong>, Wang, Y., Yu, G., Lv, L., Wang, P., Wen, Y., ... &amp; Li, J.",
-      "title": "The effect of ambient temperature on bird embryonic development: a comparison between uniparental incubating silver\u2010throated tits and biparental incubating black\u2010throated tits.",
-      "venue": "Journal of Avian Biology, 2024(5-6), e03168",
-      "url": ""
+      "authors": "",
+      "title": "The clutch size, incubation behavior of Reeves's Pheasant<i> (Syrmaticus</i><i> reevesii)</i> and their responses to ambient temperature and precipitation",
+      "venue": "AVIAN RESEARCH",
+      "url": "https://doi.org/10.1016/J.AVRS.2024.100168"
     },
     {
       "year": "2024",
-      "authors": "Jin, T., Lu, S., Wang, Y., Hua, J., Liu, Z., <strong>Hu, Q.</strong>, ... &amp; Xu, J.",
-      "title": "The clutch size, incubation behavior of Reeves's Pheasant (Syrmaticus reevesii) and their responses to ambient temperature and precipitation.",
-      "venue": "Avian Research, 15, 100168",
-      "url": ""
+      "authors": "",
+      "title": "The effect of ambient temperature on bird embryonic development: a comparison between uniparental incubating silver-throated tits and biparental incubating black-throated tits",
+      "venue": "JOURNAL OF AVIAN BIOLOGY",
+      "url": "https://doi.org/10.1111/JAV.03168"
     },
     {
       "year": "2023",
-      "authors": "Wang, Y., <strong>Hu, Q.</strong>, Xu, J., &amp; Li, J.",
-      "title": "Sex-specific selective effect of winter weather on morphological traits in a small passerine bird.",
-      "venue": "Avian Research, 14, 100093",
-      "url": ""
-    },
-    {
-      "year": "2020",
-      "authors": "<strong>Hu, Q.</strong>, Wen, Y., Yu, G., Yin, J., Guan, H., Lv, L., ... &amp; Zhang, Z.",
-      "title": "Research activity does not affect nest predation rates of the Silver-throated Tit, a passerine bird building domed nests.",
-      "venue": "Avian Research 11: 28",
-      "url": ""
+      "authors": "Yue Wang, Qian Hu, Jiliang Xu, Jianqiang Li",
+      "title": "Sex-specific selective effect of winter weather on morphological traits in a small passerine bird",
+      "venue": "Avian Research",
+      "url": "https://doi.org/10.1016/j.avrs.2023.100093"
     }
   ]
 }
