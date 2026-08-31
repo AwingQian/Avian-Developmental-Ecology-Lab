@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>胡骞 / Hu Qian | 个人学术主页 Academic Homepage</title>
 <meta name="description" content="胡骞的个人学术主页 / Personal academic homepage of Hu Qian">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..700,0..1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -169,10 +171,18 @@ More broadly, I am interested in how animals respond to changing environments th
 <section class="section publications" id="publications">
   <div class="section-inner">
     <p class="eyebrow mono">发表论文<span class="en">Publications</span></p>
-    <h2 class="section-title">代表性成果<span class="en">Selected Publications</span></h2>
+    <h2 class="section-title">
+      <a href="https://orcid.org/0000-0001-5389-4157" target="_blank" rel="noopener noreferrer" class="pub-title-link">
+        代表性成果<span class="en">Selected Publications</span>
+      </a>
+    </h2>
+    <p class="pub-updated mono" id="pubUpdated" aria-live="polite"></p>
 
-    <div class="pub-list">
+    <div class="pub-list" id="pubList" data-loading="true">
 
+      <!-- 以下为占位内容：JS 会在加载 publications.json 成功后自动替换为最新数据。
+           Placeholder content below — replaced automatically by JS once
+           publications.json loads successfully. Kept here as an offline fallback. -->
       <article class="pub-card">
         <span class="pub-year mono">2026</span>
         <div class="pub-body">
@@ -245,7 +255,7 @@ More broadly, I am interested in how animals respond to changing environments th
 
     </div>
 
-    <a href="https://scholar.google.com/citations?user=Kar1yCEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-outline all-pubs">查看完整论文列表<span class="en">View Full Publication List</span> →</a>
+    <a href="https://orcid.org/0000-0001-5389-4157" target="_blank" rel="noopener noreferrer" class="btn btn-outline all-pubs">查看完整论文列表<span class="en">View Full Publication List</span> →</a>
   </div>
 </section>
 
@@ -284,5 +294,76 @@ More broadly, I am interested in how animals respond to changing environments th
 </footer>
 
 <script src="script.js"></script>
+<script>
+  // ---- Dynamically load the latest publications from publications.json ----
+  // publications.json is refreshed automatically every ~5 days by a GitHub
+  // Actions workflow that pulls data from the ORCID record
+  // (https://orcid.org/0000-0001-5389-4157).
+  // If the fetch fails (e.g. offline, opened as a local file, or the JSON
+  // hasn't been generated yet), the hardcoded cards above stay as-is.
+  (function () {
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // Author strings (when present) are already escaped plain text produced
+    // by the fetch script — ORCID records don't always carry a full
+    // contributor list, so this field can be empty; the layout adapts.
+    function renderPub(pub) {
+      const titleText = escapeHtml(pub.title || '').trim();
+      const venueText = pub.venue ? ' <em>' + escapeHtml(pub.venue) + '</em>' : '';
+      const yearText = pub.year ? escapeHtml(pub.year) : '';
+      const authorsText = pub.authors ? escapeHtml(pub.authors) + ' ' : '';
+      const yearPrefix = yearText ? '(' + yearText + '). ' : '';
+      const titledHtml = pub.url
+        ? '<a href="' + encodeURI(pub.url) + '" target="_blank" rel="noopener noreferrer">' + titleText + '</a>'
+        : titleText;
+
+      return (
+        '<article class="pub-card">' +
+          '<span class="pub-year mono">' + yearText + '</span>' +
+          '<div class="pub-body">' +
+            '<h3 class="pub-title">' + authorsText + yearPrefix + titledHtml + '.' + venueText + '</h3>' +
+          '</div>' +
+        '</article>'
+      );
+    }
+
+    async function loadPublications() {
+      const list = document.getElementById('pubList');
+      const updatedEl = document.getElementById('pubUpdated');
+      if (!list) return;
+
+      try {
+        const res = await fetch('publications.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('publications.json not reachable (HTTP ' + res.status + ')');
+        const data = await res.json();
+        const pubs = Array.isArray(data.publications) ? data.publications.slice(0, 10) : [];
+
+        if (pubs.length > 0) {
+          list.innerHTML = pubs.map(renderPub).join('');
+        }
+        list.dataset.loading = 'false';
+
+        if (updatedEl && data.updated) {
+          const d = new Date(data.updated);
+          if (!isNaN(d)) {
+            updatedEl.textContent =
+              '数据更新于 / Data last updated: ' + d.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+          }
+        }
+      } catch (err) {
+        // Keep the fallback list already in the page; just note it in console.
+        console.warn('Could not load publications.json, showing cached list:', err);
+        list.dataset.loading = 'false';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPublications);
+  })();
+</script>
 </body>
 </html>
