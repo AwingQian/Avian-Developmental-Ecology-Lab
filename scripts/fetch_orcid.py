@@ -27,8 +27,10 @@ Usage (manual):
 This also runs automatically every ~5 days via
 .github/workflows/update-publications.yml
 """
+import html as html_module
 import json
 import os
+import re
 import time
 from datetime import datetime, timezone
 
@@ -96,13 +98,29 @@ def extract_url(node: dict) -> str:
     return url_node.get("value", "")
 
 
+def clean_text(value: str) -> str:
+    """Strip any literal HTML tags and decode HTML entities.
+
+    Some ORCID entries (especially ones imported or manually pasted from
+    other sources) contain literal markup like "<strong>" or "&amp;" as
+    plain characters rather than real formatting. We normalize everything
+    to plain text here so the frontend's own escaping produces correct
+    output instead of double-encoded tags/entities showing up on the page.
+    """
+    if not value:
+        return ""
+    text = re.sub(r"<[^>]+>", "", value)
+    text = html_module.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def extract_authors(detail: dict) -> str:
     contributors = ((detail.get("contributors") or {}).get("contributor")) or []
     names = []
     for c in contributors:
         name = (c.get("credit-name") or {}).get("value")
         if name:
-            names.append(name)
+            names.append(clean_text(name))
     return ", ".join(names)
 
 
@@ -121,8 +139,8 @@ def main():
     for group in groups[:MAX_PUBS]:
         summary = group.get("work-summary", [{}])[0]
         put_code = summary.get("put-code")
-        title = ((summary.get("title") or {}).get("title") or {}).get("value", "")
-        journal = (summary.get("journal-title") or {}).get("value", "")
+        title = clean_text(((summary.get("title") or {}).get("title") or {}).get("value", ""))
+        journal = clean_text((summary.get("journal-title") or {}).get("value", ""))
         year = ((summary.get("publication-date") or {}).get("year") or {}).get("value", "")
 
         detail = get_work_detail(token, put_code) if put_code else {}
