@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31T03:42:15.484556+00:00",
+  "updated": "2026-08-31T04:22:30.515604+00:00",
   "source": "https://orcid.org/0000-0001-5389-4157",
   "publications": [
     {
@@ -53,17 +53,17 @@
     },
     {
       "year": "2024",
+      "authors": "Qian Hu, Yue Wang, Gaoyang Yu, Lei Lv, Pengcheng Wang, Ye Wen, Jiliang Xu, Yong Wang, Zhengwang Zhang, Jianqiang Li",
+      "title": "The effect of ambient temperature on bird embryonic development: a comparison between uniparental incubating silver‐throated tits and biparental incubating black‐throated tits",
+      "venue": "Journal of Avian Biology",
+      "url": "https://doi.org/10.1111/jav.03168"
+    },
+    {
+      "year": "2024",
       "authors": "Ting Jin, Shuai Lu, Yunqi Wang, Junqin Hua, Zhengxiao Liu, Qian Hu, Yating Liu, Yuze Zhao, Jianqiang Li, Jiliang Xu",
       "title": "The clutch size, incubation behavior of Reeves's Pheasant (Syrmaticus reevesii) and their responses to ambient temperature and precipitation",
       "venue": "Avian Research",
       "url": "https://doi.org/10.1016/j.avrs.2024.100168"
-    },
-    {
-      "year": "2024",
-      "authors": "Hu, Q., Wang, Y., Yu, G., Lv, L., Wang, P., Wen, Y., Xu, J., Wang, Y., Zhang, Z., Li, J.",
-      "title": "The effect of ambient temperature on bird embryonic development: a comparison between uniparental incubating silver-throated tits and biparental incubating black-throated tits",
-      "venue": "Journal of Avian Biology",
-      "url": "https://doi.org/10.1111/jav.03168"
     },
     {
       "year": "2023",
