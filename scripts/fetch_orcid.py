@@ -114,6 +114,33 @@ def clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+_SMALL_WORDS = {
+    "a", "an", "and", "as", "at", "but", "by", "for", "in", "nor", "of",
+    "on", "or", "so", "the", "to", "up", "yet", "via",
+}
+
+
+def smart_title_case(text: str) -> str:
+    """Fix journal/venue names that ORCID stores in ALL CAPS.
+
+    Some sources (e.g. certain Crossref-imported records) store the
+    journal title in all uppercase, e.g. "FUNCTIONAL ECOLOGY". If the
+    whole string is uppercase, convert it to a more natural title case;
+    otherwise leave it untouched (it's likely already correctly cased).
+    """
+    if not text or text != text.upper() or not any(c.isalpha() for c in text):
+        return text
+    words = text.split(" ")
+    result = []
+    for i, w in enumerate(words):
+        lw = w.lower()
+        if 0 < i < len(words) - 1 and lw in _SMALL_WORDS:
+            result.append(lw)
+        else:
+            result.append(lw[:1].upper() + lw[1:] if lw else lw)
+    return " ".join(result)
+
+
 def extract_authors(detail: dict) -> str:
     contributors = ((detail.get("contributors") or {}).get("contributor")) or []
     names = []
@@ -140,7 +167,7 @@ def main():
         summary = group.get("work-summary", [{}])[0]
         put_code = summary.get("put-code")
         title = clean_text(((summary.get("title") or {}).get("title") or {}).get("value", ""))
-        journal = clean_text((summary.get("journal-title") or {}).get("value", ""))
+        journal = smart_title_case(clean_text((summary.get("journal-title") or {}).get("value", "")))
         year = ((summary.get("publication-date") or {}).get("year") or {}).get("value", "")
 
         detail = get_work_detail(token, put_code) if put_code else {}
