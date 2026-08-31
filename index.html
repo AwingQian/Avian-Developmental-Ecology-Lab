@@ -172,7 +172,7 @@ More broadly, I am interested in how animals respond to changing environments th
   <div class="section-inner">
     <p class="eyebrow mono">发表论文<span class="en">Publications</span></p>
     <h2 class="section-title">
-      <a href="https://orcid.org/0000-0001-5389-4157" target="_blank" rel="noopener noreferrer" class="pub-title-link">
+      <a href="https://scholar.google.com/citations?user=Kar1yCEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="pub-title-link">
         代表性成果<span class="en">Selected Publications</span>
       </a>
     </h2>
@@ -255,7 +255,7 @@ More broadly, I am interested in how animals respond to changing environments th
 
     </div>
 
-    <a href="https://orcid.org/0000-0001-5389-4157" target="_blank" rel="noopener noreferrer" class="btn btn-outline all-pubs">查看完整论文列表<span class="en">View Full Publication List</span> →</a>
+    <a href="https://scholar.google.com/citations?user=Kar1yCEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="btn btn-outline all-pubs">查看完整论文列表<span class="en">View Full Publication List</span> →</a>
   </div>
 </section>
 
@@ -313,7 +313,10 @@ More broadly, I am interested in how animals respond to changing environments th
     // by the fetch script — ORCID records don't always carry a full
     // contributor list, so this field can be empty; the layout adapts.
     function renderPub(pub) {
-      const titleText = escapeHtml(pub.title || '').trim();
+      // Strip any trailing period/punctuation from the source title so we
+      // never end up with a doubled "..".
+      const rawTitle = (pub.title || '').trim().replace(/[.\s]+$/, '');
+      const titleText = escapeHtml(rawTitle);
       const venueText = pub.venue ? ' <em>' + escapeHtml(pub.venue) + '</em>' : '';
       const yearText = pub.year ? escapeHtml(pub.year) : '';
       const authorsText = pub.authors ? escapeHtml(pub.authors) + ' ' : '';
