@@ -427,7 +427,7 @@ More broadly, I am interested in how animals respond to changing environments th
             if (!isNaN(d)) dateStr = d.toISOString().slice(0, 10);
           }
           const totalCitations = typeof data.total_citations === 'number' ? data.total_citations : null;
-          const citationsPrefix = totalCitations !== null ? formatCitations(totalCitations) + ' · ' : '';
+          const citationsPrefix = totalCitations !== null ? formatCitations(totalCitations) + ' (via Crossref) · ' : '';
           updatedEl.textContent =
             citationsPrefix + pubs.length + ' works' + (dateStr ? ' · list updated ' + dateStr + ' from ORCID' : ' · from ORCID');
         }
