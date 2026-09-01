@@ -1,6 +1,6 @@
 """
-Fetch the 10 most recent works from an ORCID record and write them to
-publications.json, which the website loads at runtime.
+Fetch ALL works from an ORCID record and write them to publications.json,
+which the website loads at runtime.
 
 Why ORCID instead of Google Scholar / ResearchGate:
 - Google Scholar and ResearchGate have no official public API and both
@@ -42,7 +42,9 @@ CLIENT_SECRET = os.environ.get("ORCID_CLIENT_SECRET")
 TOKEN_URL = "https://orcid.org/oauth/token"
 API_BASE = "https://pub.orcid.org/v3.0"
 OUTPUT_PATH = "publications.json"
-MAX_PUBS = 10
+# Safety cap only — prevents a runaway loop if something is misconfigured.
+# Set high enough that it never limits a normal ORCID record.
+MAX_PUBS = 500
 
 
 def get_token() -> str:
