@@ -9,6 +9,17 @@ Why ORCID instead of Google Scholar / ResearchGate:
 - ORCID provides a free, official, documented public API intended for
   exactly this kind of programmatic access.
 
+Citation counts (per-paper and total):
+- For the same reason, this script does NOT scrape Google Scholar for
+  citation counts. Instead it looks each paper's DOI up in the Crossref
+  public API (https://api.crossref.org), which is free, official, and
+  scraping-safe, and uses Crossref's own "is-referenced-by-count".
+- Crossref's citation counts are typically LOWER than what Google Scholar
+  shows, because Scholar also indexes preprints, theses, and other
+  sources Crossref doesn't track. If you need numbers that match Scholar
+  exactly, those aren't available through any automatable API and would
+  need to be entered/updated by hand instead.
+
 Setup (one-time, free, instant self-service):
     1. Sign in at https://orcid.org
     2. Click your name (top right) -> Developer Tools
@@ -41,6 +52,12 @@ CLIENT_ID = os.environ.get("ORCID_CLIENT_ID")
 CLIENT_SECRET = os.environ.get("ORCID_CLIENT_SECRET")
 TOKEN_URL = "https://orcid.org/oauth/token"
 API_BASE = "https://pub.orcid.org/v3.0"
+CROSSREF_API = "https://api.crossref.org/works/"
+CROSSREF_HEADERS = {
+    # Crossref's "polite pool" wants a descriptive UA + contact email —
+    # gets faster, more reliable responses than an anonymous request.
+    "User-Agent": "hu-qian-academic-site/1.0 (mailto:huqian1995@bjfu.edu.cn)"
+}
 OUTPUT_PATH = "publications.json"
 # Safety cap only — prevents a runaway loop if something is misconfigured.
 # Set high enough that it never limits a normal ORCID record.
@@ -153,6 +170,31 @@ def extract_authors(detail: dict) -> str:
     return ", ".join(names)
 
 
+def get_citation_count(url: str):
+    """Look up a paper's citation count via Crossref, keyed by its DOI.
+
+    Returns an int, or None if the URL isn't a DOI link or the lookup
+    fails for any reason (paper not in Crossref, network hiccup, etc.).
+    A missing count just means that card shows no citation badge — it
+    never blocks the rest of the fetch.
+    """
+    if not url or "doi.org/" not in url:
+        return None
+    doi = url.split("doi.org/", 1)[1].strip()
+    if not doi:
+        return None
+    try:
+        resp = requests.get(
+            CROSSREF_API + doi, headers=CROSSREF_HEADERS, timeout=20
+        )
+        if resp.status_code != 200:
+            return None
+        count = (resp.json().get("message") or {}).get("is-referenced-by-count")
+        return int(count) if isinstance(count, int) else None
+    except (requests.RequestException, ValueError):
+        return None
+
+
 def main():
     if not CLIENT_ID or not CLIENT_SECRET:
         raise SystemExit(
@@ -165,6 +207,8 @@ def main():
     groups = sorted(works_data.get("group", []), key=year_of_group, reverse=True)
 
     results = []
+    total_citations = 0
+    any_citation_found = False
     for group in groups[:MAX_PUBS]:
         summary = group.get("work-summary", [{}])[0]
         put_code = summary.get("put-code")
@@ -176,18 +220,27 @@ def main():
         url = extract_url(detail) or extract_url(summary)
         authors = extract_authors(detail)
 
+        citations = get_citation_count(url)
+        if citations is not None:
+            any_citation_found = True
+            total_citations += citations
+        time.sleep(0.2)
+
         results.append({
             "year": year,
             "authors": authors,  # may be empty if ORCID record has no contributor list
             "title": title,
             "venue": journal,
             "url": url,
+            "citations": citations,  # from Crossref; None if unavailable
         })
         time.sleep(0.5)
 
     payload = {
         "updated": datetime.now(timezone.utc).isoformat(),
         "source": f"https://orcid.org/{ORCID_ID}",
+        "citations_source": "https://www.crossref.org (is-referenced-by-count)",
+        "total_citations": total_citations if any_citation_found else None,
         "publications": results,
     }
 
