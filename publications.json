@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31T04:22:30.515604+00:00",
+  "updated": "2026-09-01T02:08:22.445886+00:00",
   "source": "https://orcid.org/0000-0001-5389-4157",
   "publications": [
     {
@@ -71,6 +71,20 @@
       "title": "Sex-specific selective effect of winter weather on morphological traits in a small passerine bird",
       "venue": "Avian Research",
       "url": "https://doi.org/10.1016/j.avrs.2023.100093"
+    },
+    {
+      "year": "2022",
+      "authors": "Shuai Lu, Zhengxiao Liu, Shan Tian, Kai Song, Qian Hu, Jianqiang Li, Jiliang Xu",
+      "title": "Sex-Specific Movement Responses of Reeves’s Pheasant to Human Disturbance: Importance of Body Characteristics and Reproductive Behavior",
+      "venue": "Animals",
+      "url": "https://doi.org/10.3390/ani12131619"
+    },
+    {
+      "year": "2020",
+      "authors": "Qian Hu, Ye Wen, Gaoyang Yu, Jiangnan Yin, Haohui Guan, Lei Lv, Pengcheng Wang, Jiliang Xu, Yong Wang, Zhengwang Zhang, Jianqiang Li",
+      "title": "Research activity does not affect nest predation rates of the Silver-throated Tit, a passerine bird building domed nests",
+      "venue": "Avian Research",
+      "url": "https://doi.org/10.1186/s40657-020-00214-9"
     }
   ]
 }
