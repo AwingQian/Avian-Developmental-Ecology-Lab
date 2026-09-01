@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-01T07:59:27.316874+00:00",
+  "updated": "2026-09-01T08:35:48.906889+00:00",
   "source": "https://orcid.org/0000-0001-5389-4157",
   "citations_source": "https://www.crossref.org (is-referenced-by-count)",
   "total_citations": 31,
@@ -75,6 +75,14 @@
       "venue": "Avian Research",
       "url": "https://doi.org/10.1016/j.avrs.2024.100168",
       "citations": 3
+    },
+    {
+      "year": "2023",
+      "authors": "Qian Hu, Ye Wen, Lei Lv, Pengcheng Wang, Jianqiang Li, Jiliang Xu, 1. School of Ecology and Nature Conservation, Beijing Forestry University, Beijing 100083, 2. Hunan Polytechnic of Environment and Biology, Hengyang, Hunan 421005, 3. School of Environmental Science and Engineering, Southern University of Science and Technology, Shenzhen, Guangdong 518055, 4. School of Life Sciences, Nanjing Normal University, Nanjing 210023",
+      "title": "Does research activity affect nest survival of birds? A case study on the black-throated tit (<i>Aegithalos concinnus</i>)",
+      "venue": "Biodiversity Science",
+      "url": "https://doi.org/10.17520/biods.2022570",
+      "citations": 0
     },
     {
       "year": "2023",
