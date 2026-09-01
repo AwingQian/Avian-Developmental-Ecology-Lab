@@ -324,6 +324,11 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
    Publications
    ============================================================ */
 .publications { background: var(--paper); }
+.pub-updated {
+  margin: -30px 0 34px;
+  font-size: 13px;
+  color: var(--mist);
+}
 .pub-list { display: flex; flex-direction: column; }
 .pub-card {
   display: grid;

@@ -17,15 +17,11 @@
     color: #a0522d;
     font-weight: 600;
   }
-  /* Darken the hero eyebrow text ("进化 · 生态 · 鸟类学 / Evolution · Ecology · Ornithology") */
-  .hero-content .eyebrow,
-  .hero-content .eyebrow .en {
-    color: #241c14;
-  }
-  /* Use one consistent English typeface (Inter) instead of falling back
-     to a serif like Times New Roman wherever English text appears. */
-  .en {
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  /* Make the hero action-button English glosses ("My Research" /
+     "Get in Touch") pure white for stronger contrast. */
+  .hero-actions .btn .en {
+    color: #ffffff;
+    opacity: 1;
   }
 </style>
 </head>
@@ -190,7 +186,7 @@ More broadly, I am interested in how animals respond to changing environments th
     <p class="eyebrow mono">发表论文<span class="en">Publications</span></p>
     <h2 class="section-title">
       <a href="https://scholar.google.com/citations?user=Kar1yCEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="pub-title-link">
-        最新成果<span class="en">Latest Publications</span>
+        论文列表<span class="en">Publication List</span>
       </a>
     </h2>
     <p class="pub-updated mono" id="pubUpdated" aria-live="polite"></p>
@@ -372,19 +368,21 @@ More broadly, I am interested in how animals respond to changing environments th
         const res = await fetch('publications.json?_=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error('publications.json not reachable (HTTP ' + res.status + ')');
         const data = await res.json();
-        const pubs = Array.isArray(data.publications) ? data.publications.slice(0, 10) : [];
+        const pubs = Array.isArray(data.publications) ? data.publications : [];
 
         if (pubs.length > 0) {
           list.innerHTML = pubs.map(renderPub).join('');
         }
         list.dataset.loading = 'false';
 
-        if (updatedEl && data.updated) {
-          const d = new Date(data.updated);
-          if (!isNaN(d)) {
-            updatedEl.textContent =
-              '数据更新于 / Data last updated: ' + d.toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' });
+        if (updatedEl) {
+          let dateStr = '';
+          if (data.updated) {
+            const d = new Date(data.updated);
+            if (!isNaN(d)) dateStr = d.toISOString().slice(0, 10);
           }
+          updatedEl.textContent =
+            pubs.length + ' works' + (dateStr ? ' · list updated ' + dateStr + ' from ORCID' : ' · from ORCID');
         }
       } catch (err) {
         // Keep the fallback list already in the page; just note it in console.
