@@ -330,9 +330,28 @@ h1.hero-title .en.hero-en { display: inline; font-size: 0.48em; margin-top: 0; c
   color: var(--mist);
 }
 .pub-list { display: flex; flex-direction: column; }
+.pub-year-block { display: flex; flex-direction: column; }
+.pub-year-group {
+  font-size: 15px;
+  color: var(--rust);
+  letter-spacing: 0.12em;
+  margin: 40px 0 4px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(27,38,32,0.15);
+}
+.pub-year-block:first-child .pub-year-group {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+.pub-cite-count {
+  color: var(--moss);
+  font-size: 13px;
+  white-space: nowrap;
+}
 .pub-card {
   display: grid;
-  grid-template-columns: 70px 1fr auto;
+  grid-template-columns: 110px 1fr;
   align-items: center;
   gap: 26px;
   padding: 26px 0;

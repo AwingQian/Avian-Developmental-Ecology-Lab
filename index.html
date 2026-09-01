@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,ital@9..144,300..700,0..1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 <style>
   /* Highlight the profile owner's name within publication author lists. */
   .pub-list .pub-title strong {
@@ -22,6 +22,15 @@
   .hero-actions .btn .en {
     color: #ffffff;
     opacity: 1;
+  }
+  /* Match the hero eyebrow's Chinese line ("进化 · 生态 · 鸟类学") to the
+     same rust color as other eyebrows like "简介 About"; the English gloss
+     ("Evolution · Ecology · Ornithology") is set to white per request. */
+  .hero-content .eyebrow.mono {
+    color: #A85736 !important;
+  }
+  .hero-content .eyebrow.mono .en {
+    color: #ffffff !important;
   }
 </style>
 </head>
@@ -49,8 +58,8 @@
   <div class="hero-media" style="background-image:url('image/2.jpg');"></div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <p class="eyebrow mono">进化 · 生态 · 鸟类
-      <span class="en">Evolution · Ecology · Bird</span>
+    <p class="eyebrow mono">进化 · 生态 · 鸟类学
+      <span class="en">Evolution · Ecology · Ornithology</span>
     </p>
     <h1 class="hero-title">胡骞 / HU Qian</h1>
     <p class="hero-sub">博士研究生 · 北京林业大学生态与自然保护学院
@@ -333,6 +342,11 @@ More broadly, I am interested in how animals respond to changing environments th
       return escapedAuthors.replace(pattern, '<strong>$1</strong>');
     }
 
+    function formatCitations(n) {
+      if (typeof n !== 'number' || isNaN(n)) return '';
+      return n + (n === 1 ? ' citation' : ' citations');
+    }
+
     // Author strings (when present) are already escaped plain text produced
     // by the fetch script — ORCID records don't always carry a full
     // contributor list, so this field can be empty; the layout adapts.
@@ -348,14 +362,44 @@ More broadly, I am interested in how animals respond to changing environments th
       const titledHtml = pub.url
         ? '<a href="' + encodeURI(pub.url) + '" target="_blank" rel="noopener noreferrer">' + titleText + '</a>'
         : titleText;
+      const citeText = formatCitations(pub.citations);
 
       return (
         '<article class="pub-card">' +
-          '<span class="pub-year mono">' + yearText + '</span>' +
+          '<span class="pub-cite-count mono">' + escapeHtml(citeText) + '</span>' +
           '<div class="pub-body">' +
             '<h3 class="pub-title">' + authorsText + yearPrefix + titledHtml + '.' + venueText + '</h3>' +
           '</div>' +
         '</article>'
+      );
+    }
+
+    // Group already-sorted (newest-first) publications into per-year
+    // blocks, each with a year heading followed by that year's cards.
+    function groupByYear(pubs) {
+      const groups = [];
+      let currentYear = null;
+      let currentGroup = null;
+      pubs.forEach(function (pub) {
+        const y = pub.year || '未注明年份 / Undated';
+        if (y !== currentYear) {
+          currentYear = y;
+          currentGroup = { year: y, items: [] };
+          groups.push(currentGroup);
+        }
+        currentGroup.items.push(pub);
+      });
+      return groups;
+    }
+
+    function renderYearGroup(group) {
+      const yearLabel = escapeHtml(group.year);
+      const cards = group.items.map(renderPub).join('');
+      return (
+        '<div class="pub-year-block">' +
+          '<h3 class="pub-year-group mono">' + yearLabel + '</h3>' +
+          cards +
+        '</div>'
       );
     }
 
@@ -371,7 +415,8 @@ More broadly, I am interested in how animals respond to changing environments th
         const pubs = Array.isArray(data.publications) ? data.publications : [];
 
         if (pubs.length > 0) {
-          list.innerHTML = pubs.map(renderPub).join('');
+          const groups = groupByYear(pubs);
+          list.innerHTML = groups.map(renderYearGroup).join('');
         }
         list.dataset.loading = 'false';
 
@@ -381,8 +426,10 @@ More broadly, I am interested in how animals respond to changing environments th
             const d = new Date(data.updated);
             if (!isNaN(d)) dateStr = d.toISOString().slice(0, 10);
           }
+          const totalCitations = typeof data.total_citations === 'number' ? data.total_citations : null;
+          const citationsPrefix = totalCitations !== null ? formatCitations(totalCitations) + ' · ' : '';
           updatedEl.textContent =
-            pubs.length + ' works' + (dateStr ? ' · list updated ' + dateStr + ' from ORCID' : ' · from ORCID');
+            citationsPrefix + pubs.length + ' works' + (dateStr ? ' · list updated ' + dateStr + ' from ORCID' : ' · from ORCID');
         }
       } catch (err) {
         // Keep the fallback list already in the page; just note it in console.
